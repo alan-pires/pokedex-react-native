@@ -4,7 +4,6 @@ import {Header, Item, Icon, Input  } from 'native-base'
 import PokeLoader from '../components/PokeLoader'
 import SearchBody from '../components/SearchBody'
 import axios from 'axios'
-import { ScrollView } from 'react-native-gesture-handler'
 
 function Search(){
 
@@ -12,6 +11,7 @@ function Search(){
     const [loading, setLoading] = useState(false)
      const [data, setData] = useState({})
     const [sprite, setSprite] = useState(null)
+    const [pronto, setPronto] = useState(false)
     
 
     function searchPoke(){
@@ -23,6 +23,7 @@ function Search(){
             setData(res)
             setSprite(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${res.id}.png`)
             setLoading(false)
+            setPronto(true)
         })
         .catch(function(error){
             console.log(error)
@@ -35,12 +36,14 @@ function Search(){
                 < PokeLoader/>
             )
         }else{
+            if(pronto){
+                return(                
+                    <SearchBody style={{backgroundColor:'#FFF'}} sprite={sprite} data={data} />                            
+                  
+               )
+            }
             return(
-                <ScrollView >
-                 <SearchBody style={{backgroundColor:'#CCC'}} sprite={sprite} data={data} />
-                   
-                   </ScrollView>
-               
+                <View><Text></Text></View>
             )
         }
     }

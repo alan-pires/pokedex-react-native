@@ -1,18 +1,20 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { ScrollView, Text, View, StyleSheet, Image } from 'react-native'
 import { ListItem, List } from 'native-base'
 
 
 function SearchBody({ sprite, data }) {
+    
+
     let pokemonData = data
-
-    if (!pokemonData) {
-        return <View><Text> </Text></View>
-    }
-
+    console.log(pokemonData)
+            //contentContainerStyle={{flexGrow:1}}
+        // if (!pokemonData) {
+        //     return <View><Text> </Text></View>
+        // }
 
     return (
-        <ScrollView contentContainerStyle={{flexGrow:1}} style={{ backgroundColor: '#CCC' }}>
+        <ScrollView  style={{ backgroundColor: '#FFF' }}>
             <Text style={styles.title}>
                 {` #${pokemonData.id} - ${pokemonData.name}`}
             </Text>
@@ -22,8 +24,19 @@ function SearchBody({ sprite, data }) {
                     source={{ uri: sprite }}
                 />
                 <View style={styles.info}>
+                <ListItem >
+                        <Text style={styles.titleDescription}>Type </Text>
+                    </ListItem>
+                <List 
+                    dataArray={pokemonData.types}
+                    renderRow={(item) => <ListItem>
+                        <Text>Type - {item.type.name}</Text>
+                        </ListItem>}
+                    >                        
+                    </List>
+
                     <ListItem >
-                        <Text style={{ fontWeight: 'bold' }}>Size </Text>
+                        <Text style={styles.titleDescription}>Size </Text>
                     </ListItem>
                     <ListItem >
                         <Text>Weight - {pokemonData.weight / 10}kg</Text>
@@ -33,16 +46,17 @@ function SearchBody({ sprite, data }) {
                     </ListItem>
 
                     <ListItem >
-                        <Text style={{ fontWeight: 'bold' }}>Abilities </Text>
+                        <Text style={styles.titleDescription}>Abilities </Text>
                     </ListItem>
-                    <List
+                                        
+                    { <List
+                        style={{marginBottom: 100}}
                         dataArray={pokemonData.abilities}
                         renderRow={(item) => <ListItem >
                             <Text>Abilitie - {item.ability.name}</Text>
                         </ListItem>}
                     >
-
-                    </List>
+                    </List>}
 
                 </View>
 
@@ -57,21 +71,28 @@ function SearchBody({ sprite, data }) {
 
 const styles = StyleSheet.create({
 
-    title: {
+    title: {        
         fontSize: 26,
-        alignSelf: 'center'
+        textAlign: 'center',
+        backgroundColor: '#ADD8E6'
     },
     imagePokemonView: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor:'#ADD8E6'
+    },
+    titleDescription:{
+        fontWeight: 'bold',
+         backgroundColor:'#ADD8E6',
+         fontSize: 18
     },
     info: {
         flex: 1,
         width: '100%',
         backgroundColor: '#FFF',
-        opacity: 0.8,
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
+        
     }
 
 })

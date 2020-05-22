@@ -12,8 +12,9 @@ export default function App() {
   return (
         <NavigationContainer>
           <stack.Navigator>
-            <stack.Screen name='Search' component={Search} options={{headerShown: false}} />
-            <stack.Screen name='Landing' component={Landing} options={{headerShown:false}}/>
+          <stack.Screen name='Landing' component={Landing} options={{headerShown:false}}/>
+          <stack.Screen name='Search' component={Search} options={{headerShown: false}} />      
+                
           </stack.Navigator>
 
         </NavigationContainer>
